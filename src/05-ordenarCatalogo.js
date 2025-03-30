@@ -12,5 +12,3 @@ const catalogo = [
 catalogo.sort((a, b) => a.precio - b.precio)
 console.log(catalogo)
 
-catalogo.sort((a, b) => a - b)
-console.log(catalogo)
