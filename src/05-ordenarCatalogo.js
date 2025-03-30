@@ -9,6 +9,6 @@ const catalogo = [
   { nombre: "Monitor", precio: 150 }
 ]
 
-catalogo.sort((a, b) => a.precio - b.precio)
+catalogo.sort((a, b) =>  b.precio - a.precio)
 console.log(catalogo)
 
