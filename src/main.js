@@ -1,9 +1,10 @@
 require("colors");
 const inquirer = require('inquirer');
 const { ejecutarEjercicioIVA } = require('./01-actualizarPrecios');
+const { ejecutarEjercicioFiltro } = require('./02-estudiantesAprobados');
 
 function logoInicio() {
-    console.clear();  // Limpiar
+    console.clear();
     const asciiArt = String.raw`
    __   __  __      _            _
   / /  |  \/  | ___| |_ ___   __| | ___  ___
@@ -69,7 +70,7 @@ async function mostrarMenu() {
         logoInicio();
 
         const { opcion: seleccion } = await inquirer.prompt(opciones);
-        logoInicio();
+        console.clear();
         switch (seleccion) {
             case '01':
                 ejecutarEjercicioIVA()
@@ -77,8 +78,7 @@ async function mostrarMenu() {
                 break;
 
             case '02':
-                console.log('Ejecutando lógica para FILTER (Aprobados)...'.cyan);
-                // --- Aquí iría tu lógica real para filter ---
+                ejecutarEjercicioFiltro()
                 continuarEnMenu = await confirmarContinuar();
                 break;
 
@@ -102,6 +102,4 @@ async function mostrarMenu() {
     logoInicio()
     console.log('                                       powered by Nexus USPG'.red);
 }
-
-// --- Inicia la aplicación ---
 mostrarMenu();

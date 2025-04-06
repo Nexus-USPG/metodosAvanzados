@@ -22,17 +22,13 @@ function ejecutarEjercicioIVA() {
     ];
 
     console.log('\nProductos Originales:'.yellow);
-    console.table(productosSinIVA); // console.table muestra arrays de objetos de forma clara
+    console.table(productosSinIVA);
 
     const productosConIVA = agregarIVA(productosSinIVA);
-
     console.log('\nProductos con IVA incluido:'.green);
     console.table(productosConIVA);
     console.log('--------------------------------------\n'.blue);
-    // No necesita llamar a confirmarContinuar aquí, eso lo hace el menú principal
 }
-
-// Exportamos la función que el menú llamará
 module.exports = {
     ejecutarEjercicioIVA
 };
