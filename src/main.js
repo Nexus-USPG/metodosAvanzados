@@ -1,7 +1,22 @@
 require("colors");
 const inquirer = require('inquirer');
+
+// --- Importación de Módulos de Ejercicios ---
 const { ejecutarEjercicioIVA } = require('./01-actualizarPrecios');
 const { ejecutarEjercicioFiltro } = require('./02-estudiantesAprobados');
+const { ejecutarEjercicioContar } = require('./03-cantidadEstudiantesAprobados');
+const { ejecutarEjercicio04 } = require('./04-unirFrase');
+const { ejecutarEjercicio05 } = require('./05-ordenarCatalogo');
+const { ejecutarEjercicio06 } = require('./06-agregarProducto');
+const { ejecutarEjercicio07 } = require('./07-priorizarTarea');
+const { ejecutarEjercicio08 } = require('./08-ordenarPorPrecio');
+const { ejecutarEjercicio09 } = require('./09-removerUltimoCliente');
+const { ejecutarEjercicio10 } = require('./10-empezarConCancionDestacada');
+// Asumiendo que los ejercicios 11-14 no se refactorizan o no existen en esta tanda
+const { ejecutarEjercicio15 } = require('./15-ubicacionDelPaquete');
+const { ejecutarEjercicio16 } = require('./16-verificarTesoro');
+const { ejecutarEjercicio17 } = require('./17-verificarDescuento');
+const { ejecutarEjercicio18 } = require('./18-enviarCorreoConfirmacion');
 
 function logoInicio() {
     console.clear();
@@ -10,47 +25,45 @@ function logoInicio() {
   / /  |  \/  | ___| |_ ___   __| | ___  ___
 < <    | |\/| |/ _ \ __/ _ \ / _\`|/ _ \/ __|
  | |   | |  | |  __/ || (_) | (_| | (_) \__ \
-  \_\  |_|  |_|\___|\__\___/ \__,_|\___/|___/          __ 
-         / \__   ____ _ _ __  ______ _  __| | ___  ___  \ \  
+  \_\  |_|  |_|\___|\__\___/ \__,_|\___/|___/           __
+         / \__   ____ _ _ __  ______ _  __| | ___  ___  \ \
         / _ \ \ / / _\`| '_ \|_  / _\`|/ _\`|/ _ \/ __|  | |
        / ___ \ V / (_| | | | |/ / (_| | (_| | (_) \__ \   > >
-      /_/   \_\_/ \__,_|_| |_/___\__,_|\__,_|\___/|___/  | | 
+      /_/   \_\_/ \__,_|_| |_/___\__,_|\__,_|\___/|___/  | |
                                                         /_/ `;
     console.log(asciiArt.cyan);
 }
 
-// --- Opciones del Menú Principal ---
 const opciones = [
     {
         type: 'list',
         name: 'opcion',
         message: '¿Qué ejercicio deseas ejecutar?',
         choices: [
-            { value: '01', name: '01. map      - IVA' },
-            { value: '02', name: '02. filter   - Aprobados' },
-            { value: '03', name: '03. reduce   - Contar OK' },
-            { value: '04', name: '04. reduce   - Frase' },
-            { value: '05', name: '05. sort     - Catálogo ↑' },
-            { value: '06', name: '06. push     - Añadir P.' },
-            { value: '07', name: '07. unshift  - Priorizar' },
-            { value: '08', name: '08. sort     - Inv ↑' },
-            { value: '09', name: '09. pop      - Último Out' },
-            { value: '10', name: '10. shift    - Prim Out' },
-            { value: '11', name: '11. from     - A Letras' },
-            { value: '12', name: '12. concat   - Unir List' },
-            { value: '13', name: '13. slice    - Recorte' },
-            { value: '14', name: '14. splice   - Gestor E.' },
-            { value: '15', name: '15. indexOf  - Ubicar P.' },
-            { value: '16', name: '16. includes - Tesoro' },
-            { value: '17', name: '17. some     - Descuentos' },
-            { value: '18', name: '18. forEach  - Emails' },
+            { value: '01', name: `${'01.'.yellow} map      - Actualizar Precios con IVA` },
+            { value: '02', name: `${'02.'.yellow} filter   - Filtrar Estudiantes Aprobados` },
+            { value: '03', name: `${'03.'.yellow} reduce   - Contar Estudiantes Aprobados` },
+            { value: '04', name: `${'04.'.yellow} join     - Unir Palabras en Frase` }, // o reduce si se implementó así
+            { value: '05', name: `${'05.'.yellow} sort     - Ordenar Catálogo por Precio Asc` },
+            { value: '06', name: `${'06.'.yellow} push     - Añadir Producto al Final` },
+            { value: '07', name: `${'07.'.yellow} unshift  - Añadir Tarea Prioritaria al Inicio` },
+            { value: '08', name: `${'08.'.yellow} sort     - Ordenar Inventario por Precio Asc` },
+            { value: '09', name: `${'09.'.yellow} pop      - Remover Último Cliente/Elemento` },
+            { value: '10', name: `${'10.'.yellow} shift    - Remover Primera Canción/Elemento` },
+            // { value: '11', name: '11. from     - A Letras' }, // Descomentar si existe
+            // { value: '12', name: '12. concat   - Unir List' }, // Descomentar si existe
+            // { value: '13', name: '13. slice    - Recorte' }, // Descomentar si existe
+            // { value: '14', name: '14. splice   - Gestor E.' }, // Descomentar si existe
+            { value: '15', name: `${'15.'.yellow} indexOf  - Ubicar Estado del Paquete` },
+            { value: '16', name: `${'16.'.yellow} includes - Verificar si Existe Tesoro` },
+            { value: '17', name: `${'17.'.yellow} some     - Verificar si Hay Descuentos` },
+            { value: '18', name: `${'18.'.yellow} forEach  - "Enviar" Correos a Asistentes` },
             new inquirer.Separator(),
-            { value: '0', name: '0. Salir' },
+            { value: '0', name: `${'0.'.red} Salir` },
         ]
     }
 ];
 
-// --- Función de Confirmación ---
 async function confirmarContinuar() {
     const pregunta = [{
         type: 'confirm',
@@ -62,44 +75,71 @@ async function confirmarContinuar() {
     return confirmacion;
 }
 
-// --- Función Principal del Menú ---
 async function mostrarMenu() {
     let continuarEnMenu = true;
-
     while (continuarEnMenu) {
         logoInicio();
-
         const { opcion: seleccion } = await inquirer.prompt(opciones);
         console.clear();
         switch (seleccion) {
             case '01':
-                ejecutarEjercicioIVA()
-                continuarEnMenu = await confirmarContinuar();
+                ejecutarEjercicioIVA();
                 break;
-
             case '02':
-                ejecutarEjercicioFiltro()
-                continuarEnMenu = await confirmarContinuar();
+                ejecutarEjercicioFiltro();
                 break;
-
+            case '03':
+                ejecutarEjercicioContar();
+                break;
+            case '04':
+                ejecutarEjercicio04();
+                break;
+            case '05':
+                ejecutarEjercicio05();
+                break;
+            case '06':
+                ejecutarEjercicio06();
+                break;
+            case '07':
+                ejecutarEjercicio07();
+                break;
+            case '08':
+                ejecutarEjercicio08();
+                break;
+            case '09':
+                ejecutarEjercicio09();
+                break;
+            case '10':
+                ejecutarEjercicio10();
+                break;
+            // Casos para 11-14 si se implementan
+            case '15':
+                ejecutarEjercicio15();
+                break;
+            case '16':
+                ejecutarEjercicio16();
+                break;
+            case '17':
+                ejecutarEjercicio17();
+                break;
             case '18':
-                console.log('Ejecutando lógica para forEach (Emails)...'.cyan);
-                // --- Aquí iría tu lógica real para forEach ---
-                continuarEnMenu = await confirmarContinuar();
+                ejecutarEjercicio18();
                 break;
 
-            case '0': // Salir
-                console.log('\n¡Hasta luego! Gracias por usar el menú.'.yellow);
-                continuarEnMenu = false; // Termina el bucle while
-                break; // Sale del switch
+            case '0':
+                continuarEnMenu = false;
+                break;
 
-            default: // Opción no válida (si inquirer permitiera alguna)
+            default:
                 console.log('Opción no reconocida.'.red);
-                continuarEnMenu = await confirmarContinuar(); // Pregunta si quiere reintentar
                 break;
         }
+        if (continuarEnMenu) {
+            continuarEnMenu = await confirmarContinuar();
+        }
     }
-    logoInicio()
-    console.log('                                       powered by Nexus USPG'.red);
+    logoInicio();
+    console.log('\n                                       powered by Nexus USPG'.red);
 }
+
 mostrarMenu();
