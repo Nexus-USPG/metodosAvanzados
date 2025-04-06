@@ -62,7 +62,7 @@ const opciones = [
             { value: '17', name: `${'17.'.yellow} some     - Verificar si Hay Descuentos` },
             { value: '18', name: `${'18.'.yellow} forEach  - "Enviar" Correos a Asistentes` },
             new inquirer.Separator(),
-            { value: '0', name: `${'0.'.red} Salir` },
+            { value: '0', name: `${'0.'.red} Salir     - ctrl + c` },
         ]
     }
 ];
