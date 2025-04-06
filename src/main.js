@@ -12,7 +12,10 @@ const { ejecutarEjercicio07 } = require('./07-priorizarTarea');
 const { ejecutarEjercicio08 } = require('./08-ordenarPorPrecio');
 const { ejecutarEjercicio09 } = require('./09-removerUltimoCliente');
 const { ejecutarEjercicio10 } = require('./10-empezarConCancionDestacada');
-// Asumiendo que los ejercicios 11-14 no se refactorizan o no existen en esta tanda
+const { ejecutarEjercicio11 } = require('./11-convertirRespuestaEnArreglo');
+const { ejecutarEjercicio12 } = require('./12-combinarListasDeCompra');
+const { ejecutarEjercicio13 } = require('./13-recortarImagen');
+const { ejecutarEjercicio14 } = require('./14-gestionarEmpleados');
 const { ejecutarEjercicio15 } = require('./15-ubicacionDelPaquete');
 const { ejecutarEjercicio16 } = require('./16-verificarTesoro');
 const { ejecutarEjercicio17 } = require('./17-verificarDescuento');
@@ -50,10 +53,10 @@ const opciones = [
             { value: '08', name: `${'08.'.yellow} sort     - Ordenar Inventario por Precio Asc` },
             { value: '09', name: `${'09.'.yellow} pop      - Remover Último Cliente/Elemento` },
             { value: '10', name: `${'10.'.yellow} shift    - Remover Primera Canción/Elemento` },
-            // { value: '11', name: '11. from     - A Letras' }, // Descomentar si existe
-            // { value: '12', name: '12. concat   - Unir List' }, // Descomentar si existe
-            // { value: '13', name: '13. slice    - Recorte' }, // Descomentar si existe
-            // { value: '14', name: '14. splice   - Gestor E.' }, // Descomentar si existe
+            { value: '11', name: `${'11.'.yellow} from     - A Letras` },
+            { value: '12', name: `${'12.'.yellow} concat   - Unir List` },
+            { value: '13', name: `${'13.'.yellow} slice    - Recorte` },
+            { value: '14', name: `${'14.'.yellow} splice   - Gestor E.` },
             { value: '15', name: `${'15.'.yellow} indexOf  - Ubicar Estado del Paquete` },
             { value: '16', name: `${'16.'.yellow} includes - Verificar si Existe Tesoro` },
             { value: '17', name: `${'17.'.yellow} some     - Verificar si Hay Descuentos` },
@@ -112,7 +115,18 @@ async function mostrarMenu() {
             case '10':
                 ejecutarEjercicio10();
                 break;
-            // Casos para 11-14 si se implementan
+            case '11':
+                ejecutarEjercicio11();
+                break;
+            case '12':
+                ejecutarEjercicio12();
+                break;
+            case '13':
+                ejecutarEjercicio13();
+                break;
+            case '14':
+                ejecutarEjercicio14();
+                break;
             case '15':
                 ejecutarEjercicio15();
                 break;
