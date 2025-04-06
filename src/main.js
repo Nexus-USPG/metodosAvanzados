@@ -1,5 +1,6 @@
 require("colors");
 const inquirer = require('inquirer');
+const { ejecutarEjercicioIVA } = require('./01-actualizarPrecios');
 
 function logoInicio() {
     console.clear();  // Limpiar
@@ -71,8 +72,7 @@ async function mostrarMenu() {
         logoInicio();
         switch (seleccion) {
             case '01':
-                console.log('Ejecutando lógica para MAP (IVA)...'.cyan);
-                // --- Aquí iría tu lógica real para map ---
+                ejecutarEjercicioIVA()
                 continuarEnMenu = await confirmarContinuar();
                 break;
 

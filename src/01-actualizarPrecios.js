@@ -1,20 +1,38 @@
-/*Una tienda quiere mostrar los precios finales de sus productos,incluyendo el 21% de IVA. 
+/* Una tienda quiere mostrar los precios finales de sus productos, incluyendo el 21% de IVA.
 Crea una función que reciba una lista de productos sin IVA y devuelva una lista con los precios
 actualizados.*/
-
-function agregarIVA(producto) {
-    const productosconIVA = producto.map((producto) => {
-        producto.precio = producto.precio * 1.21;
-        return producto;
-    })
-    return productosconIVA;
+function agregarIVA(productos) {
+    let productosConIVA;
+    productosConIVA = productos.map((producto) => {
+        return {
+            ...producto,
+            precio: parseFloat((producto.precio * 1.21).toFixed(2))
+        };
+    });
+    return productosConIVA;
 }
 
-const producto = [
-    {nombre: 'Producto 1', precio: 100},
-    {nombre: 'Producto 2', precio: 150},
-    {nombre: 'Producto 3', precio: 200},
-]
 
-const productosconIVA = agregarIVA(producto)
-console.log(productosconIVA)
+function ejecutarEjercicioIVA() {
+    console.log('\n--- Opción 01: Calcular IVA (21%) ---'.blue);
+    const productosSinIVA = [
+        { nombre: 'Camisa Casual', precio: 25.00 },
+        { nombre: 'Pantalón Jeans', precio: 40.50 },
+        { nombre: 'Zapatos Deportivos', precio: 89.99 },
+    ];
+
+    console.log('\nProductos Originales:'.yellow);
+    console.table(productosSinIVA); // console.table muestra arrays de objetos de forma clara
+
+    const productosConIVA = agregarIVA(productosSinIVA);
+
+    console.log('\nProductos con IVA incluido:'.green);
+    console.table(productosConIVA);
+    console.log('--------------------------------------\n'.blue);
+    // No necesita llamar a confirmarContinuar aquí, eso lo hace el menú principal
+}
+
+// Exportamos la función que el menú llamará
+module.exports = {
+    ejecutarEjercicioIVA
+};
