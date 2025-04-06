@@ -1,6 +1,6 @@
 # Universidad San Pablo de Guatemala 🎓🏫
 
-## 💻 Metodos Avanzados - Ejercicio Grupal 
+## 💻 Métodos Avanzados - Ejercicio Grupal 
 ### 📚 Integrantes:
 - **Jennifer Gabriela Duque Ventura** 
 - **Karla Betzabé Osorio Dávila**
@@ -15,7 +15,7 @@
   | | -       | |
   | |         | |
   | |_________| |__________________________
-  \=____________/ $: CLI Metodos Avanzados )
+  \=____________/ $: CLI Métodos Avanzados )
   / """"""""""" \                         /
  / ::::::::::::: \                    =D-'
 (_________________)
